@@ -1,0 +1,89 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+
+    // ★★★ この行はありましたか？ ★★★
+    id 'org.jetbrains.kotlin.plugin.serialization' version '2.2.21' // または使っている Kotlin のバージョン
+}
+
+android {
+    namespace 'com.example.chatrelayclient'
+    compileSdk {
+        version = release(36)
+    }
+
+    defaultConfig {
+        applicationId "com.example.chatrelayclient"
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+
+        // Core Library Desugaring を有効化
+        coreLibraryDesugaringEnabled true
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    buildFeatures {
+        compose true
+    }
+}
+
+dependencies {
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.lifecycle.runtime.ktx
+    implementation libs.androidx.activity.compose
+    implementation platform(libs.androidx.compose.bom)
+    implementation libs.androidx.compose.ui
+    implementation libs.androidx.compose.ui.graphics
+    implementation libs.androidx.compose.ui.tooling.preview
+    implementation libs.androidx.compose.material3
+    implementation libs.androidx.material3
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+    androidTestImplementation platform(libs.androidx.compose.bom)
+    androidTestImplementation libs.androidx.compose.ui.test.junit4
+    debugImplementation libs.androidx.compose.ui.tooling
+    debugImplementation libs.androidx.compose.ui.test.manifest
+
+    // Ktorのバージョン指定
+    def ktor_version = "2.2.4" // サーバーと同じバージョン
+
+    // Ktor クライアント (OkHttp)
+    implementation "io.ktor:ktor-client-okhttp:$ktor_version"
+
+    // WebSocket
+    implementation "io.ktor:ktor-client-websockets:$ktor_version"
+
+    // JSON (ContentNegotiation) を扱うためのライブラリ
+    implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
+
+    // Navigation for Compose
+    implementation "androidx.navigation:navigation-compose:2.7.7"
+
+    // ViewModel と Compose を連携させるためのライブラリ
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0"
+
+    // ★Material 3 の「拡張アイコン」ライブラリを追加★
+    implementation "androidx.compose.material:material-icons-extended:1.6.8" // (または最新バージョン)
+
+    // Core Library Desugaring
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+}
