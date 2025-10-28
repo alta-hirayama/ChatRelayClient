@@ -64,6 +64,7 @@ fun main() {
     //      その型に変換 (スマートキャスト) してくれるので、安全にプロパティにアクセスできます。
     when (event1) {
         is ChatMessageEvent -> {
+            // 中身は ChatMessageEvent なのでこちらが実行される
             // このブロック内では event1 は ChatMessageEvent 型として扱われます。
             println("チャットメッセージを受信:")
             println("  ユーザー: ${event1.user}") // キャストなしで .user にアクセス
