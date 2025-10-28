@@ -51,6 +51,7 @@ class ChatViewModel : ViewModel() {
     private val _messages = MutableStateFlow<List<ChatMessage>>(emptyList())
     val messages = _messages.asStateFlow()
 
+
     /**
      * サーバーへの接続を開始する
      * @param ip 接続先のIPアドレス
