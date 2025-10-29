@@ -1,4 +1,5 @@
 // JSONの識別子typeからサブクラスに型変換するサンプル
+// https://star-zero.medium.com/kotlin-serializationのポリモーフィズム-1268c26f1fb3
 
 package com.example.chatrelayclient
 
